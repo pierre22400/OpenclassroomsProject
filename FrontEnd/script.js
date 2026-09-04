@@ -25,3 +25,34 @@ function genererTravaux(travaux) {
 }
 
     genererTravaux(travaux);
+
+
+  // Récupération des catégories depuis l'API categories 
+  const reponseCategories = await fetch("http://localhost:5678/api/categories");
+  const categories = await reponseCategories.json();
+
+
+const menuCategories = document.querySelector(".menu-categories");   
+const boutonTous = document.createElement("button");
+boutonTous.innerText = "Tous";
+boutonTous.classList.add("categorie-button");
+menuCategories.appendChild(boutonTous);
+
+function genererCategories(categories) {
+  for (let i = 0; i < categories.length; i++) {
+    const boutonCategorie = document.createElement("button");
+    boutonCategorie.innerText = categories[i].name;
+    boutonCategorie.setAttribute("data-category-id", categories[i].id);
+    menuCategories.appendChild(boutonCategorie);
+
+
+    boutonCategorie.classList.add("categorie-button");
+    boutonCategorie.addEventListener("click", function() {
+      const categoryId = this.getAttribute("data-category-id");
+    });
+  }
+}
+
+    genererCategories(categories);
+
+
