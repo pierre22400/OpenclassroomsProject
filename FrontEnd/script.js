@@ -1,8 +1,6 @@
-
-
-  // Récupération des projets depuis l'API works
+// Récupération des projets depuis l'API works
 const reponse = await fetch("http://localhost:5678/api/works");
-const travaux = await reponse.json();
+let travaux = await reponse.json();
 
 const mesProjets = document.querySelector(".gallery");
 
@@ -20,39 +18,164 @@ function genererTravaux(travaux) {
     figureProjet.appendChild(titreProjet);
 
     mesProjets.appendChild(figureProjet);
-
   }
 }
 
-    genererTravaux(travaux);
+genererTravaux(travaux);
 
 
-  // Récupération des catégories depuis l'API categories 
-  const reponseCategories = await fetch("http://localhost:5678/api/categories");
-  const categories = await reponseCategories.json();
+// Récupération des catégories depuis l'API categories
+const reponseCategories = await fetch(
+  "http://localhost:5678/api/categories"
+);
 
+const categories = await reponseCategories.json();
 
-const menuCategories = document.querySelector(".menu-categories");   
+const menuCategories = document.querySelector(".menu-categories");
+
 const boutonTous = document.createElement("button");
+
 boutonTous.innerText = "Tous";
 boutonTous.classList.add("categorie-button");
+
 menuCategories.appendChild(boutonTous);
+
+boutonTous.addEventListener("click", function () {
+  mesProjets.innerHTML = "";
+  genererTravaux(travaux);
+});
 
 function genererCategories(categories) {
   for (let i = 0; i < categories.length; i++) {
     const boutonCategorie = document.createElement("button");
+
     boutonCategorie.innerText = categories[i].name;
     boutonCategorie.setAttribute("data-category-id", categories[i].id);
+    boutonCategorie.classList.add("categorie-button");
+
     menuCategories.appendChild(boutonCategorie);
 
+    boutonCategorie.addEventListener("click", function () {
+      const categoryId = Number(this.getAttribute("data-category-id"));
 
-    boutonCategorie.classList.add("categorie-button");
-    boutonCategorie.addEventListener("click", function() {
-      const categoryId = this.getAttribute("data-category-id");
+      const travauxFiltres = travaux.filter(function (travail) {
+        return travail.categoryId === categoryId;
+      });
+
+      mesProjets.innerHTML = "";
+      genererTravaux(travauxFiltres);
     });
   }
 }
 
-    genererCategories(categories);
+genererCategories(categories);
 
+
+
+
+// Fenêtre modale
+
+
+const openModalButton = document.querySelector("#open-modal");
+const modal = document.querySelector("#modal");
+const closeModalButton = document.querySelector("#close-modal");
+
+function genererTravauxModal(listeTravaux) {
+  const galleryModal = document.querySelector(".gallery-modal");
+
+  for (let i = 0; i < listeTravaux.length; i++) {
+    const figureProjet = document.createElement("figure");
+
+    const imageProjet = document.createElement("img");
+    imageProjet.src = listeTravaux[i].imageUrl;
+
+    const boutonSupprimer = document.createElement("button");
+    boutonSupprimer.classList.add("delete-photo");
+    boutonSupprimer.type = "button";
+    boutonSupprimer.dataset.id = listeTravaux[i].id;
+
+    const iconePoubelle = document.createElement("i");
+    iconePoubelle.classList.add(
+      "fa-solid",
+      "fa-trash-can"
+    );
+
+    boutonSupprimer.appendChild(iconePoubelle);
+
+    boutonSupprimer.addEventListener(
+      "click",
+      async function (event) {
+        const id =
+          event.currentTarget.dataset.id;
+
+        const token =
+          localStorage.getItem("token");
+
+        const reponseSuppression =
+          await fetch(
+            `http://localhost:5678/api/works/${id}`,
+            {
+              method: "DELETE",
+              headers: {
+                Authorization: `Bearer ${token}`
+              }
+            }
+          );
+
+        if (reponseSuppression.ok) {
+          figureProjet.remove();
+
+          travaux = travaux.filter(
+            function (travail) {
+              return travail.id !== Number(id);
+            }
+          );
+
+          mesProjets.innerHTML = "";
+          genererTravaux(travaux);
+        }
+      }
+    );
+
+    figureProjet.appendChild(imageProjet);
+    figureProjet.appendChild(
+      boutonSupprimer
+    );
+
+    galleryModal.appendChild(
+      figureProjet
+    );
+  }
+}
+
+function openModal() {
+  modal.classList.add("active");
+  modal.setAttribute("aria-hidden", "false");
+
+  const galleryModal = document.querySelector(".gallery-modal");
+
+  galleryModal.innerHTML = "";
+  genererTravauxModal(travaux);
+}
+
+function closeModal() {
+  modal.classList.remove("active");
+  modal.setAttribute("aria-hidden", "true");
+}
+
+openModalButton.addEventListener("click", openModal);
+
+closeModalButton.addEventListener("click", closeModal);
+
+modal.addEventListener("click", function (event) {
+  if (event.target === modal) {
+    closeModal();
+  }
+});
+
+window.addEventListener("keydown", function (event) {
+  if (event.key === "Escape") {
+    closeModal();
+  }
+});
 
