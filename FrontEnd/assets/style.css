@@ -234,19 +234,7 @@ h2 {
 	border-radius: 60px;
 }
 
-#add-photo button {
-	font-family: 'Syne';
-	font-weight: 700;
-	color: white;
-	background-color: #1D6154;
-	width: 180px;
-	margin: 5px auto 20px;
-	height: 38px;
-	text-align: center;
-	justify-content: center;
-	border: 1px solid #1D6154;
-	border-radius: 60px;
-}
+
 
 
 #login-form a {
@@ -530,4 +518,139 @@ footer nav ul {
 
 .hidden {
   display: none;
+}
+#modal-add-view {
+  width: 420px;
+}
+
+#back-gallery {
+  position: absolute;
+  top: 25px;
+  left: 30px;
+  border: none;
+  background: none;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+#modal-add-view h2 {
+  margin-bottom: 30px;
+}
+
+#add-work-form {
+  width: 360px;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.photo-upload {
+  width: 360px;
+  height: 145px;
+  margin-bottom: 30px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  background-color: #E8F1F6;
+  border-radius: 3px;
+}
+
+.photo-upload i {
+  margin-bottom: 10px;
+  font-size: 55px;
+  color: #B9C5CC;
+}
+
+.photo-upload-button {
+  width: 170px;
+  height: 32px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  margin-bottom: 8px;
+
+  border-radius: 50px;
+  background-color: #CBD6DC;
+
+  color: #306685;
+  font-weight: 500;
+
+  cursor: pointer;
+}
+
+.photo-upload p {
+  font-size: 10px;
+  color: #444444;
+}
+
+#image {
+  display: none;
+}
+
+#add-work-form > label {
+  margin-bottom: 10px;
+
+  font-family: 'Work Sans';
+  font-size: 14px;
+  font-weight: 500;
+
+  color: #3D3D3D;
+}
+
+#title,
+#category {
+  width: 360px;
+  height: 50px;
+
+  box-sizing: border-box;
+  padding: 0 15px;
+
+  border: none;
+  background-color: white;
+
+  box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+
+  margin-bottom: 25px;
+
+  font-family: 'Work Sans';
+  font-size: 14px;
+}
+
+#category {
+  cursor: pointer;
+}
+
+#add-work-form {
+  padding-bottom: 25px;
+  border-bottom: 1px solid #B3B3B3;
+}
+
+#validate-work {
+  width: 237px;
+  height: 36px;
+
+  margin: 27px auto -65px;
+
+  border: none;
+  border-radius: 60px;
+
+  background-color: #A7A7A7;
+  color: white;
+
+  font-family: 'Syne';
+  font-size: 14px;
+  font-weight: 700;
+
+  cursor: pointer;
+}
+
+#add-work-error {
+  margin-top: -10px;
+  color: red;
+  text-align: center;
 }

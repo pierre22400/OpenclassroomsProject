@@ -101,8 +101,27 @@
         </button>
         <h2> Ajout photo </h2>
         <form id="add-work-form">
-          <label for="image"> Image </label>
-          <input type="file" name="image" id="image" accept="image/png, image/jpeg">
+<div class="photo-upload">
+  <i class="fa-regular fa-image"></i>
+
+  <label
+    for="image"
+    class="photo-upload-button"
+  >
+    + Ajouter photo
+  </label>
+
+  <p>
+    jpg, png : 4mo max
+  </p>
+
+  <input
+    type="file"
+    name="image"
+    id="image"
+    accept="image/png, image/jpeg"
+  >
+</div>
           <label for="title"> Titre </label>
           <input type="text" name="title" id="title">
           <label for="category"> Catégorie </label>

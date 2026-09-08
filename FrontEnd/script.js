@@ -94,6 +94,11 @@ function genererTravauxModal(listeTravaux) {
     boutonSupprimer.type = "button";
     boutonSupprimer.dataset.id = listeTravaux[i].id;
 
+
+
+
+   
+
     const iconePoubelle = document.createElement("i");
     iconePoubelle.classList.add(
       "fa-solid",
@@ -148,6 +153,19 @@ function genererTravauxModal(listeTravaux) {
   }
 }
 
+
+const selectCategorie = document.querySelector("#category");
+  
+    selectCategorie.innerHTML = "";
+    for (let i = 0; i < categories.length; i++) {
+      const optionCategorie = document.createElement("option"); 
+      optionCategorie.value = categories[i].id;
+      optionCategorie.textContent = categories[i].name;
+      selectCategorie.appendChild(optionCategorie);
+    } 
+
+
+
 function openModal() {
   modal.classList.add("active");
   modal.setAttribute("aria-hidden", "false");
@@ -178,4 +196,22 @@ window.addEventListener("keydown", function (event) {
     closeModal();
   }
 });
+
+
+
+
+
+const galleryView = document.querySelector("#modal-gallery-view");
+const addView = document.querySelector("#modal-add-view");
+const boutonAjouter = document.querySelector("#add-photo");
+boutonAjouter.addEventListener("click", function () {
+  addView.classList.remove("hidden");
+  galleryView.classList.add("hidden");
+});
+const boutonBack = document.querySelector("#back-gallery");
+boutonBack.addEventListener("click", function () {
+  addView.classList.add("hidden");
+  galleryView.classList.remove("hidden");
+});
+
 
