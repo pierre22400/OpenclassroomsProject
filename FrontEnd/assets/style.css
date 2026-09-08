@@ -654,3 +654,29 @@ footer nav ul {
   color: red;
   text-align: center;
 }
+
+.bouton-modifier {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  font-family: 'Work Sans';
+  font-size: 14px;
+  color: black;
+}
+
+.bouton-modifier i {
+  font-size: 15px;
+}
+
+#open-modal {
+  padding: 0;
+  border: none;
+  background: none;
+
+  font-family: 'Work Sans';
+  font-size: 14px;
+  color: black;
+
+  cursor: pointer;
+}
