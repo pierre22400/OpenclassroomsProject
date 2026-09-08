@@ -153,7 +153,7 @@ function genererTravauxModal(listeTravaux) {
   }
 }
 
-
+// ajout des catégories dans la fenêtre modale
 const selectCategorie = document.querySelector("#category");
   
     selectCategorie.innerHTML = "";
@@ -215,3 +215,15 @@ boutonBack.addEventListener("click", function () {
 });
 
 
+const addWorkForm = document.querySelector("#add-work-form");
+const addTitle = document.querySelector("#title")
+const addImage = document.querySelector("#image")
+
+  addWorkForm.addEventListener("submit", async function (event) {
+    event.preventDefault();
+
+
+  ajouter addTitle et addImage au tableau travaux
+}
+
+)
