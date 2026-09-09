@@ -94,11 +94,6 @@ function genererTravauxModal(listeTravaux) {
     boutonSupprimer.type = "button";
     boutonSupprimer.dataset.id = listeTravaux[i].id;
 
-
-
-
-   
-
     const iconePoubelle = document.createElement("i");
     iconePoubelle.classList.add(
       "fa-solid",
@@ -106,7 +101,6 @@ function genererTravauxModal(listeTravaux) {
     );
 
     boutonSupprimer.appendChild(iconePoubelle);
-
     boutonSupprimer.addEventListener(
       "click",
       async function (event) {
@@ -215,15 +209,63 @@ boutonBack.addEventListener("click", function () {
 });
 
 
-const addWorkForm = document.querySelector("#add-work-form");
-const addTitle = document.querySelector("#title")
-const addImage = document.querySelector("#image")
+
+function addWorks() {
+  const addWorkForm = document.querySelector("#add-work-form");
+  const addTitle = document.querySelector("#title");
+  const addImage = document.querySelector("#image");
+  const addCategory = document.querySelector("#category");
 
   addWorkForm.addEventListener("submit", async function (event) {
     event.preventDefault();
 
+    const titre = addTitle.value;
+    const image = addImage.files[0];
+    const categorie = addCategory.value;
 
-  ajouter addTitle et addImage au tableau travaux
+    if (!titre || !image || !categorie) {
+      alert("Veuillez remplir tous les champs.");
+      return;
+    }
+
+    const formData = new FormData();
+
+    formData.append("image", image);
+    formData.append("title", titre);
+    formData.append("category", categorie);
+
+    const token = localStorage.getItem("token");
+
+    const reponseAdd = await fetch(
+      "http://localhost:5678/api/works",
+      {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${token}`
+        },
+        body: formData
+      }
+    );
+
+if (reponseAdd.ok) {
+  const nouveauTravail = await reponseAdd.json();
+
+  travaux.push(nouveauTravail);
+
+  mesProjets.innerHTML = "";
+  genererTravaux(travaux);
+
+  const galleryModal = document.querySelector(".gallery-modal");
+
+  galleryModal.innerHTML = "";
+  genererTravauxModal(travaux);
+
+  addWorkForm.reset();
+
+  alert("Votre ajout a bien été pris en compte.");
+}
+  });
 }
 
-)
+addWorks();
+
