@@ -468,22 +468,18 @@ footer nav ul {
 }
 
 #add-photo {
-	width: 237px;
-	height: 36px;
-
-	margin-top: 35px;
-
-	border: none;
-	border-radius: 60px;
-
-	background-color: #1D6154;
-	color: white;
-
-	font-family: 'Syne';
-	font-weight: 700;
-	font-size: 14px;
-
-	cursor: pointer;
+  width: 237px;
+  height: 36px;
+  margin: 35px auto 0;
+  display: block;
+  border: none;
+  border-radius: 60px;
+  background-color: #1D6154;
+  color: white;
+  font-family: 'Syne';
+  font-weight: 700;
+  font-size: 14px;
+  cursor: pointer;
 }
 
 .gallery-modal figure {
